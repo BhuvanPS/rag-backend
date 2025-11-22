@@ -204,10 +204,14 @@ class EmbeddingGenerator:
         # 3. Process Projects
         projects = data.get('projects', [])
         for project in projects:
+            description = project.get('description', '')
+            if isinstance(description, list):
+                description = ' '.join(description)
+
             project_text = (
                 f"Project: {project.get('title', '')}. "
                 f"Category: {', '.join(project.get('category', []))}. "
-                f"Description: {project.get('description', '')}. "
+                f"Description: {description}. "
                 f"Technologies used: {', '.join(project.get('tags', []))}. "
                 f"Key Metrics: {', '.join(project.get('metrics', []))}. "
                 f"Link: {project.get('link', '')}."
