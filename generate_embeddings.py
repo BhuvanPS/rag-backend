@@ -233,7 +233,9 @@ class EmbeddingGenerator:
         journey = data.get('journeyData', {})
         
         # Experience
+        # Experience
         if 'experience' in journey:
+            all_experiences = []
             for exp in journey['experience']:
                 # Handle description as either array or string for backwards compatibility
                 description = exp.get('description', '')
@@ -246,14 +248,17 @@ class EmbeddingGenerator:
                     f"Description: {description}. "
                     f"Highlights: {', '.join(exp.get('highlights', []))}."
                 )
-                
-                print(f"Processing experience: {exp.get('company', '')}...")
+                all_experiences.append(exp_text)
+            
+            if all_experiences:
+                combined_experience_text = " ".join(all_experiences)
+                print(f"Processing all experiences as a single document...")
                 documents.append({
-                    "content": exp_text,
-                    "embedding": self.get_embedding(exp_text),
+                    "content": combined_experience_text,
+                    "embedding": self.get_embedding(combined_experience_text),
                     "metadata": {
-                        "type": "experience",
-                        "company": exp.get('company')
+                        "type": "experience_summary",
+                        "count": len(all_experiences)
                     }
                 })
 
