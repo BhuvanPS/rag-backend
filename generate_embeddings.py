@@ -235,10 +235,15 @@ class EmbeddingGenerator:
         # Experience
         if 'experience' in journey:
             for exp in journey['experience']:
+                # Handle description as either array or string for backwards compatibility
+                description = exp.get('description', '')
+                if isinstance(description, list):
+                    description = ' '.join(description)
+                
                 exp_text = (
                     f"Work Experience: {exp.get('title', '')} at {exp.get('company', '')} "
                     f"({exp.get('period', '')}). "
-                    f"Description: {exp.get('description', '')}. "
+                    f"Description: {description}. "
                     f"Highlights: {', '.join(exp.get('highlights', []))}."
                 )
                 
