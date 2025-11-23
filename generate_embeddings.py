@@ -247,16 +247,16 @@ class EmbeddingGenerator:
                     f"Highlights: {', '.join(exp.get('highlights', []))}."
                 )
                 
-                for chunk in self.chunk_text(exp_text):
-                    print(f"Processing experience: {exp.get('company', '')}...")
-                    documents.append({
-                        "content": chunk,
-                        "embedding": self.get_embedding(chunk),
-                        "metadata": {
-                            "type": "experience",
-                            "company": exp.get('company')
-                        }
-                    })
+                print(f"Processing experience: {exp.get('company', '')}...")
+                documents.append({
+                    "content": exp_text,
+                    "embedding": self.get_embedding(exp_text),
+                    "metadata": {
+                        "type": "experience",
+                        "company": exp.get('company')
+                    }
+                })
+
 
         # Education
         if 'education' in journey:
