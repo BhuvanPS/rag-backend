@@ -31,7 +31,7 @@ Converts your portfolio data from [data.js](file:///Users/bhuvanps/Portfolio/Por
 
 ### Key Steps
 
-#### 1. **Data Extraction** (Lines 13-53)
+#### 1. **Data Extraction** 
 ```python
 def load_data_from_js(file_path: str) -> Dict[str, Any]:
 ```
@@ -43,7 +43,7 @@ def load_data_from_js(file_path: str) -> Dict[str, Any]:
 > [!NOTE]
 > This clever approach allows Python to read JavaScript data without manual conversion
 
-#### 2. **Text Chunking** (Lines 61-70)
+#### 2. **Text Chunking** 
 ```python
 def chunk_text(self, text: str, chunk_size: int = 200) -> List[str]:
 ```
@@ -52,7 +52,7 @@ def chunk_text(self, text: str, chunk_size: int = 200) -> List[str]:
 - Ensures embeddings stay within API limits
 - Maintains semantic coherence
 
-#### 3. **Embedding Generation** (Lines 72-95)
+#### 3. **Embedding Generation** 
 ```python
 def get_embedding(self, text: str) -> List[float]:
 ```
@@ -61,7 +61,7 @@ def get_embedding(self, text: str) -> List[float]:
 - Converts text into high-dimensional vectors (768 dimensions)
 - Each vector represents semantic meaning
 
-#### 4. **Portfolio Processing** (Lines 97-283)
+#### 4. **Portfolio Processing** 
 
 The `process_portfolio` method systematically processes:
 
@@ -74,7 +74,7 @@ The `process_portfolio` method systematically processes:
 | **Education** | Degree, institution, period | `type: "education"`, `institution` |
 | **Certifications** | Name, issuer | `type: "certifications"` |
 
-#### 5. **Output Format** (Lines 321-335)
+#### 5. **Output Format** 
 
 Saves to [embeddings.json](file:///Users/bhuvanps/Portfolio/rag-backend/embeddings.json):
 ```json
@@ -103,7 +103,7 @@ Implements the RAG pipeline: retrieval → context assembly → response generat
 
 ### Key Components
 
-#### 1. **Initialization** (Lines 19-37)
+#### 1. **Initialization** 
 
 ```python
 class PortfolioChatbot:
@@ -123,7 +123,7 @@ class PortfolioChatbot:
 > - Only use provided context
 > - Admit when information is not available
 
-#### 2. **Embedding Loading** (Lines 39-50)
+#### 2. **Embedding Loading**   
 
 ```python
 def load_embeddings(self, file_path: str):
@@ -134,7 +134,7 @@ def load_embeddings(self, file_path: str):
 - Converts embeddings to **NumPy array** for efficient computation
 - Stores document content and metadata separately
 
-#### 3. **Query Embedding** (Lines 52-59)
+#### 3. **Query Embedding**         
 
 ```python
 def get_query_embedding(self, text: str) -> np.ndarray:
@@ -148,7 +148,7 @@ def get_query_embedding(self, text: str) -> np.ndarray:
 - Converts user question into same vector space as documents
 - Uses `task_type="retrieval_query"` for optimized retrieval
 
-#### 4. **Semantic Search** (Lines 61-79)
+#### 4. **Semantic Search** 
 
 ```python
 def find_relevant_context(self, query: str, top_k: int = 3) -> List[str]:
@@ -166,7 +166,7 @@ def find_relevant_context(self, query: str, top_k: int = 3) -> List[str]:
 > [!TIP]
 > Cosine similarity measures the angle between vectors, making it ideal for semantic search
 
-#### 5. **Response Generation** (Lines 81-105)
+#### 5. **Response Generation** 
 
 ```python
 def chat(self, user_query: str) -> str:
@@ -312,12 +312,12 @@ sequenceDiagram
 
 ## 📝 Key Files Summary
 
-| File | Lines | Purpose |
-|------|-------|---------|
-| [generate_embeddings.py](file:///Users/bhuvanps/Portfolio/rag-backend/generate_embeddings.py) | 347 | Extract data.js → Generate embeddings → Save JSON |
-| [chatbot.py](file:///Users/bhuvanps/Portfolio/rag-backend/chatbot.py) | 131 | Load embeddings → Semantic search → Generate responses |
-| [app.py](file:///Users/bhuvanps/Portfolio/rag-backend/app.py) | 42 | Flask server → REST API endpoint |
-| [embeddings.json](file:///Users/bhuvanps/Portfolio/rag-backend/embeddings.json) | ~500KB | Pre-computed vector database |
+| File | Purpose |
+|------|---------|
+| [generate_embeddings.py](file:///Users/bhuvanps/Portfolio/rag-backend/generate_embeddings.py) | Extract data.js → Generate embeddings → Save JSON |
+| [chatbot.py](file:///Users/bhuvanps/Portfolio/rag-backend/chatbot.py) | Load embeddings → Semantic search → Generate responses |
+| [app.py](file:///Users/bhuvanps/Portfolio/rag-backend/app.py) | Flask server → REST API endpoint |
+| [embeddings.json](file:///Users/bhuvanps/Portfolio/rag-backend/embeddings.json) | Pre-computed vector database |
 
 ---
 
