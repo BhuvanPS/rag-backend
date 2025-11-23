@@ -253,7 +253,6 @@ Handles initialization failures and missing parameters gracefully.
 
 Here's how a user query flows through the system:
 
-````carousel
 ```mermaid
 sequenceDiagram
     participant U as User
@@ -275,7 +274,6 @@ sequenceDiagram
     A-->>F: JSON response
     F-->>U: Display answer
 ```
-<!-- slide -->
 ### Step-by-Step Breakdown
 
 1. **User asks question** → Frontend captures input
@@ -286,7 +284,7 @@ sequenceDiagram
 6. **Prompt construction** → Add system prompt + context
 7. **LLM generation** → Gemini generates answer
 8. **Response return** → JSON sent back to frontend
-````
+
 
 ---
 
