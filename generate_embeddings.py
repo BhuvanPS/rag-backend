@@ -265,18 +265,24 @@ class EmbeddingGenerator:
 
         # Education
         if 'education' in journey:
+            all_education = []
             for edu in journey['education']:
                 edu_text = (
                     f"Education: {edu.get('degree', '')} at {edu.get('institution', '')} "
                     f"({edu.get('period', '')}). "
                     f"Description: {edu.get('description', '')}."
                 )
+                all_education.append(edu_text)
+            
+            if all_education:
+                combined_education_text = " ".join(all_education)
+                print(f"Processing all education as a single document...")
                 documents.append({
-                    "content": edu_text,
-                    "embedding": self.get_embedding(edu_text),
+                    "content": combined_education_text,
+                    "embedding": self.get_embedding(combined_education_text),
                     "metadata": {
-                        "type": "education",
-                        "institution": edu.get('institution')
+                        "type": "education_summary",
+                        "count": len(all_education)
                     }
                 })
 
