@@ -1,6 +1,6 @@
 # RAG Backend Implementation Walkthrough
 
-This document provides a comprehensive overview of how the RAG (Retrieval-Augmented Generation) backend is implemented for your portfolio chatbot.
+This document provides a comprehensive overview of how the RAG (Retrieval-Augmented Generation) backend is implemented for the portfolio chatbot.
 
 ## 🏗️ Architecture Overview
 
@@ -27,7 +27,7 @@ graph TB
 ## 📦 Component 1: Embedding Generation
 
 ### Purpose
-Converts your portfolio data from [data.js](file:///Users/bhuvanps/Portfolio/Portfolio/data.js) into vector embeddings that can be semantically searched.
+Converts the portfolio data from [data.js](file:///Users/bhuvanps/Portfolio/Portfolio/data.js) into vector embeddings that can be semantically searched.
 
 ### Key Steps
 
@@ -370,10 +370,10 @@ When you modify [data.js](file:///Users/bhuvanps/Portfolio/Portfolio/data.js):
 
 ## 🎯 Summary
 
-Your RAG backend implements a **three-stage pipeline**:
+The RAG backend implements a **three-stage pipeline**:
 
 1. **Offline:** Extract portfolio data → Generate embeddings → Store vectors
 2. **Runtime:** User query → Semantic search → Retrieve context
 3. **Generation:** Context + Query → LLM → Personalized response
 
-This architecture enables your portfolio to answer questions intelligently by combining the power of semantic search (finding relevant information) with generative AI (crafting natural responses), all while maintaining accuracy by grounding responses in your actual portfolio data.
+This architecture enables the portfolio-bot to answer questions intelligently by combining the power of semantic search (finding relevant information) with generative AI (crafting natural responses), all while maintaining accuracy by grounding responses in the actual portfolio data.
