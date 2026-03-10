@@ -328,7 +328,7 @@ def main():
         print(f"   Found keys: {list(portfolio_data.keys())}")
         
         # Initialize generator
-        print(f"🔗 Connecting to Gemini API (text-embedding-004 model)...")
+        print(f"🔗 Connecting to Gemini API (gemini-embedding-001 model)...")
         generator = EmbeddingGenerator(api_key)
         
         # Process portfolio data
