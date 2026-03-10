@@ -19,7 +19,7 @@ class PortfolioChatbot:
     def __init__(self, embeddings_file: str = None):
         if embeddings_file is None:
             embeddings_file = os.path.join(os.path.dirname(__file__), "embeddings.json")
-        self.model = genai.GenerativeModel('gemini-1.5-flash')
+        self.model = genai.GenerativeModel('gemini-2.5-flash')
         self.embedding_model = 'models/gemini-embedding-001'
         self.documents = []
         self.embeddings = []
