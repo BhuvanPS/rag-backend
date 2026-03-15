@@ -338,7 +338,7 @@ def main():
         output = {
             "documents": documents,
             "metadata": {
-                "model": "gemini-embedding-001",
+                "model": "gemini-embedding-2-preview",
                 "dimension": len(documents[0]['embedding']) if documents else 0,
                 "total_chunks": len(documents),
                 "source": "data.js"
