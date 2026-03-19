@@ -56,7 +56,7 @@ def load_data_from_js(file_path: str) -> Dict[str, Any]:
 class EmbeddingGenerator:
     def __init__(self, api_key: str):
         self.api_key = api_key
-        self.embedding_url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:embedContent"
+        self.embedding_url = "https://generativelanguage.googleapis.com/v1beta/models/text-embedding-004:embedContent"
         
     def chunk_text(self, text: str, chunk_size: int = 200) -> List[str]:
         """Split text into chunks by word count"""
@@ -76,7 +76,7 @@ class EmbeddingGenerator:
         }
         
         payload = {
-            "model": "models/gemini-embedding-001",
+            "model": "models/text-embedding-004",
             "content": {
                 "parts": [{"text": text}]
             }
@@ -328,7 +328,7 @@ def main():
         print(f"   Found keys: {list(portfolio_data.keys())}")
         
         # Initialize generator
-        print(f"🔗 Connecting to Gemini API (gemini-embedding-001 model)...")
+        print(f"🔗 Connecting to Gemini API (text-embedding-004 model)...")
         generator = EmbeddingGenerator(api_key)
         
         # Process portfolio data
