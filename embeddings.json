@@ -86274,7 +86274,7 @@
     }
   ],
   "metadata": {
-    "model": "gemini-embedding-2-preview",
+    "model": "gemini-2.5-flash",
     "dimension": 3072,
     "total_chunks": 28,
     "source": "data.js"
