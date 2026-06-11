@@ -1,11 +1,12 @@
-from flask import Flask, request, jsonify
-from flask_cors import CORS
-from chatbot import PortfolioChatbot
 import os
 from dotenv import load_dotenv
 
 # Load environment variables from parent directory
 load_dotenv(os.path.join(os.path.dirname(__file__), '../.env'))
+
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+from chatbot import PortfolioChatbot
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes

@@ -2,24 +2,21 @@ import os
 import json
 import numpy as np
 from typing import List, Dict, Any
-import google.generativeai as genai
+from google import genai
 from dotenv import load_dotenv
 
 # Load environment variables
 load_dotenv()
 
-# Configure Gemini
-api_key = os.environ.get('GEMINI_API_KEY')
-if not api_key:
-    raise ValueError("GEMINI_API_KEY not found in the environment variables")
-
-genai.configure(api_key=api_key)
-
 class PortfolioChatbot:
     def __init__(self, embeddings_file: str = None):
+        api_key = os.environ.get('GEMINI_API_KEY')
+        if not api_key:
+            raise ValueError("GEMINI_API_KEY not found in the environment variables")
         if embeddings_file is None:
             embeddings_file = os.path.join(os.path.dirname(__file__), "embeddings.json")
-        self.model = genai.GenerativeModel('gemini-2.5-flash')
+        self.client = genai.Client(api_key=api_key)
+        self.model = 'gemini-2.5-flash'
         self.embedding_model = 'models/gemini-embedding-001'
         self.documents = []
         self.embeddings = []
@@ -77,12 +74,11 @@ class PortfolioChatbot:
 
     def get_query_embedding(self, text: str) -> np.ndarray:
         """Generate embedding for the user query"""
-        result = genai.embed_content(
+        result = self.client.models.embed_content(
             model=self.embedding_model,
-            content=text,
-            task_type="retrieval_query"
+            contents=text
         )
-        return np.array(result['embedding'])
+        return np.array(result.embeddings[0].values)
 
     def find_relevant_context(self, query: str, top_k: int = 3) -> List[str]:
         """Find the most relevant documents for the query"""
@@ -127,7 +123,10 @@ class PortfolioChatbot:
         """
         
         # 3. Generate response
-        response = self.model.generate_content(prompt)
+        response = self.client.models.generate_content(
+            model=self.model,
+            contents=prompt
+        )
         return response.text
 
 def main():
