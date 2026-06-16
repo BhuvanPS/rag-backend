@@ -296,6 +296,17 @@ class EmbeddingGenerator:
                 "metadata": {"type": "certifications"}
             })
 
+        # Achievements & Leadership
+        if 'achievements' in journey:
+            for ach in journey['achievements']:
+                ach_text = f"Achievement/Leadership: {ach.get('title')}. Description: {ach.get('description')}"
+                print(f"Processing achievement: {ach.get('title')[:30]}...")
+                documents.append({
+                    "content": ach_text,
+                    "embedding": self.get_embedding(ach_text),
+                    "metadata": {"type": "achievements", "title": ach.get('title')}
+                })
+
         return documents
 
 
